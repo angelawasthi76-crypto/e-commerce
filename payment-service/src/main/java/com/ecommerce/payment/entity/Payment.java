@@ -24,11 +24,11 @@ public class Payment {
     @Column(nullable = false, precision = 10, scale = 2)
     private BigDecimal amount;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(name = "payment_method", nullable = false)
     private PaymentMethod paymentMethod;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
     private PaymentStatus status = PaymentStatus.PENDING;
 

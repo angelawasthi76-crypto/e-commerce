@@ -14,7 +14,7 @@ public class Notification {
     @Column(name = "customer_id", nullable = false)
     private Long customerId;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
     private NotificationType type;
 

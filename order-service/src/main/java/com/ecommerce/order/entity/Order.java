@@ -38,11 +38,11 @@ public class Order {
     @Column(name = "shipping_address", columnDefinition = "TEXT")
     private String shippingAddress;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(name = "payment_status", nullable = false)
     private PaymentStatus paymentStatus = PaymentStatus.PENDING;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(name = "order_status", nullable = false)
     private OrderStatus orderStatus = OrderStatus.PENDING;
 

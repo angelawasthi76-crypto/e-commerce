@@ -42,7 +42,7 @@ public class Product {
     @Column(precision = 3, scale = 2)
     private BigDecimal rating = BigDecimal.ZERO;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
     private ProductStatus status = ProductStatus.ACTIVE;
 

@@ -17,7 +17,7 @@ public class Category {
     @Column(length = 500)
     private String description;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
     private CategoryStatus status = CategoryStatus.ACTIVE;
 

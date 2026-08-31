@@ -26,11 +26,11 @@ public class User {
     @Column(length = 20)
     private String phone;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
     private Role role = Role.CUSTOMER;
 
-    @Enumerated(EnumType.STRING)
+    
     @Column(nullable = false)
     private UserStatus status = UserStatus.ACTIVE;
 
