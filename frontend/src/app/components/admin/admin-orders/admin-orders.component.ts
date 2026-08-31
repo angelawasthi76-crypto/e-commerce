@@ -54,9 +54,9 @@ import { Order } from '../../../models/order.model';
         </tbody>
       </table>
       <div class="pagination">
-        <button [disabled]="currentPage === 0" (click)="currentPage--; loadOrders()">← Prev</button>
+        <button [disabled]="currentPage === 0" (click)="prevPage()">← Prev</button>
         <span>Page {{currentPage + 1}}</span>
-        <button (click)="currentPage++; loadOrders()">Next →</button>
+        <button (click)="nextPage()">Next →</button>
       </div>
     </div>
   `,
@@ -98,6 +98,9 @@ export class AdminOrdersComponent implements OnInit {
 
   constructor(private orderService: OrderService) {}
   ngOnInit(): void { this.loadOrders(); }
+
+  prevPage(): void { this.currentPage--; this.loadOrders(); }
+  nextPage(): void { this.currentPage++; this.loadOrders(); }
 
   loadOrders(): void {
     this.orderService.getAllOrders(this.currentPage, 10, this.statusFilter || undefined).subscribe(res => {

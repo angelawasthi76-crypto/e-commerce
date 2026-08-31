@@ -80,7 +80,7 @@ import { Cart } from '../../../models/order.model';
   `]
 })
 export class CartComponent implements OnInit {
-  cart?: Cart;
+  cart: Cart | null = null;
 
   constructor(private cartService: CartService, private router: Router) {}
 

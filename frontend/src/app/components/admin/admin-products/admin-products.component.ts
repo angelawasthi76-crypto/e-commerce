@@ -63,9 +63,9 @@ import { Product, Category, PageResponse } from '../../../models/product.model';
         </tbody>
       </table>
       <div class="pagination">
-        <button [disabled]="currentPage === 0" (click)="currentPage--; loadProducts()">← Prev</button>
+        <button [disabled]="currentPage === 0" (click)="prevPage()">← Prev</button>
         <span>Page {{currentPage + 1}}</span>
-        <button (click)="currentPage++; loadProducts()">Next →</button>
+        <button (click)="nextPage()">Next →</button>
       </div>
     </div>
   `,
@@ -111,6 +111,9 @@ export class AdminProductsComponent implements OnInit {
       if (res.success && res.data) this.categories = res.data;
     });
   }
+
+  prevPage(): void { this.currentPage--; this.loadProducts(); }
+  nextPage(): void { this.currentPage++; this.loadProducts(); }
 
   loadProducts(): void {
     this.productService.getProducts(this.currentPage, 10).subscribe(res => {

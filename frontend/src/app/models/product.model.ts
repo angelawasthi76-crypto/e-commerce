@@ -1,3 +1,11 @@
+export interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  errorCode?: string;
+  data?: T;
+  timestamp: string;
+}
+
 export interface Product {
   id: number;
   sku: string;

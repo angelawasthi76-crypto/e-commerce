@@ -40,10 +40,12 @@ export class ProductService {
   }
 
   getFilteredProducts(categoryId?: number, brand?: string, minPrice?: number, maxPrice?: number,
-                       page = 0, size = 10): Observable<ApiResponse<PageResponse<Product>>> {
+                       page = 0, size = 10, sortBy = 'createdAt', sortDir = 'desc'): Observable<ApiResponse<PageResponse<Product>>> {
     let params = new HttpParams()
       .set('page', page.toString())
-      .set('size', size.toString());
+      .set('size', size.toString())
+      .set('sortBy', sortBy)
+      .set('sortDir', sortDir);
 
     if (categoryId) params = params.set('categoryId', categoryId.toString());
     if (brand) params = params.set('brand', brand);

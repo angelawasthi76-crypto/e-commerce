@@ -1,3 +1,19 @@
+export interface ApiResponse<T> {
+  success: boolean;
+  message: string;
+  errorCode?: string;
+  data?: T;
+  timestamp: string;
+}
+
+export interface PageResponse<T> {
+  content: T[];
+  totalElements: number;
+  totalPages: number;
+  size: number;
+  number: number;
+}
+
 export interface CartItem {
   id: number;
   productId: number;

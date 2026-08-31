@@ -32,9 +32,9 @@ import { Payment } from '../../../models/order.model';
         </tbody>
       </table>
       <div class="pagination">
-        <button [disabled]="currentPage === 0" (click)="currentPage--; loadPayments()">← Prev</button>
+        <button [disabled]="currentPage === 0" (click)="prevPage()">← Prev</button>
         <span>Page {{currentPage + 1}}</span>
-        <button (click)="currentPage++; loadPayments()">Next →</button>
+        <button (click)="nextPage()">Next →</button>
       </div>
     </div>
   `,
@@ -60,6 +60,9 @@ export class AdminPaymentsComponent implements OnInit {
   statusFilter = '';
   constructor(private paymentService: PaymentService) {}
   ngOnInit(): void { this.loadPayments(); }
+  prevPage(): void { this.currentPage--; this.loadPayments(); }
+  nextPage(): void { this.currentPage++; this.loadPayments(); }
+
   loadPayments(): void {
     this.paymentService.getAllPayments(this.currentPage, 10, this.statusFilter || undefined).subscribe(res => {
       if (res.success && res.data) this.payments = res.data.content;

@@ -32,9 +32,9 @@ import { Product } from '../../../models/product.model';
           <div class="sku">SKU: {{product.sku}}</div>
           <div class="quantity-selector">
             <label>Quantity:</label>
-            <button (click)="quantity > 1 && quantity--">-</button>
+            <button (click)="decrementQty()">-</button>
             <span>{{quantity}}</span>
-            <button (click)="quantity++">+</button>
+            <button (click)="incrementQty()">+</button>
           </div>
           <div class="actions">
             <button class="add-cart" (click)="addToCart()">Add to Cart</button>
@@ -98,6 +98,9 @@ export class ProductDetailComponent implements OnInit {
       });
     });
   }
+
+  incrementQty(): void { this.quantity++; }
+  decrementQty(): void { if (this.quantity > 1) this.quantity--; }
 
   addToCart(): void {
     if (this.product) {

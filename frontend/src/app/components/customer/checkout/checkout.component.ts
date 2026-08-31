@@ -75,7 +75,7 @@ import { Cart, Order } from '../../../models/order.model';
           <p>{{address.name}}, {{address.line1}}, {{address.city}}, {{address.state}} {{address.pincode}}</p>
         </div>
         <div class="review-total">
-          <div class="summary-row"><span>Subtotal</span><span>\${{cart?.subtotal.toFixed(2)}}</span></div>
+          <div class="summary-row"><span>Subtotal</span><span>\${{(cart?.subtotal ?? 0).toFixed(2)}}</span></div>
           <div class="summary-row"><span>Shipping</span><span>{{(cart?.subtotal || 0) >= 100 ? 'Free' : '$9.99'}}</span></div>
           <div class="summary-row"><span>Tax (18%)</span><span>\${{((cart?.subtotal || 0) * 0.18).toFixed(2)}}</span></div>
           <hr />
@@ -194,7 +194,7 @@ import { Cart, Order } from '../../../models/order.model';
 })
 export class CheckoutComponent implements OnInit {
   step = 1;
-  cart?: Cart;
+  cart: Cart | null = null;
   order?: Order;
   processing = false;
   paymentError = '';
@@ -216,7 +216,7 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.cartService.cart$.subscribe(cart => this.cart = cart);
+    this.cartService.cart$.subscribe(cart => this.cart = cart ?? null);
     this.cartService.getCart().subscribe();
   }
 
