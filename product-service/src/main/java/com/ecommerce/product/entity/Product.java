@@ -120,7 +120,13 @@ public class Product {
     public BigDecimal getDiscountPercentage() { return discountPercentage; }
     public void setDiscountPercentage(BigDecimal discountPercentage) { this.discountPercentage = discountPercentage; }
 
-    public BigDecimal getFinalPrice() { return finalPrice; }
+    public BigDecimal getFinalPrice() {
+        if (finalPrice != null) return finalPrice;
+        if (price == null) return BigDecimal.ZERO;
+        if (discountPercentage == null || discountPercentage.compareTo(BigDecimal.ZERO) == 0) return price;
+        BigDecimal discount = price.multiply(discountPercentage).divide(new BigDecimal("100"), 2, java.math.RoundingMode.HALF_UP);
+        return price.subtract(discount);
+    }
     public void setFinalPrice(BigDecimal finalPrice) { this.finalPrice = finalPrice; }
 
     public String getImageUrl() { return imageUrl; }
