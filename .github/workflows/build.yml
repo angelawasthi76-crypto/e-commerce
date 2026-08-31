@@ -1,0 +1,78 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: testpassword
+          MYSQL_DATABASE: ecommerce_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Build User Service
+        run: cd user-service && mvn clean compile -q
+
+      - name: Build Product Service
+        run: cd product-service && mvn clean compile -q
+
+      - name: Build Inventory Service
+        run: cd inventory-service && mvn clean compile -q
+
+      - name: Build Order Service
+        run: cd order-service && mvn clean compile -q
+
+      - name: Build Payment Service
+        run: cd payment-service && mvn clean compile -q
+
+      - name: Build Notification Service
+        run: cd notification-service && mvn clean compile -q
+
+      - name: Build API Gateway
+        run: cd api-gateway && mvn clean compile -q
+
+      - name: Run User Service Tests
+        run: cd user-service && mvn test -q
+
+      - name: Run Product Service Tests
+        run: cd product-service && mvn test -q
+
+      - name: Run Order Service Tests
+        run: cd order-service && mvn test -q
+
+      - name: Run Payment Service Tests
+        run: cd payment-service && mvn test -q
+
+      - name: Build Angular Frontend
+        run: |
+          cd frontend
+          npm ci
+          npx ng build --configuration production
+
+      - name: Verify Docker Build
+        run: docker compose build --quiet

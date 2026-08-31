@@ -19,7 +19,7 @@ spring:
     web-application-type: reactive
 
 jwt:
-  secret: ZWNvbW1lcmNlLXNlY3JldC1rZXktZm9yLWp3dC10b2tlbi1nZW5lcmF0aW9uLXVzZS1hLXZlcnktbG9uZy1zZWN1cmUtc3RyaW5n
+  secret: ${JWT_SECRET:change-this-to-a-secure-random-string}
 
 management:
   endpoints:
