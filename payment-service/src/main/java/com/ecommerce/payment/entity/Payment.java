@@ -26,10 +26,12 @@ public class Payment {
 
     
     @Column(name = "payment_method", nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentStatus status = PaymentStatus.PENDING;
 
     @Column(name = "transaction_date")

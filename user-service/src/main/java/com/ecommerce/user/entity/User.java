@@ -28,10 +28,12 @@ public class User {
 
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role = Role.CUSTOMER;
 
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private UserStatus status = UserStatus.ACTIVE;
 
     @Column(name = "created_at", nullable = false, updatable = false)

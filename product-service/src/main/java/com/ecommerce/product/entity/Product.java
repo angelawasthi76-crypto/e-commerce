@@ -44,6 +44,7 @@ public class Product {
 
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private ProductStatus status = ProductStatus.ACTIVE;
 
     @Column(name = "created_at", nullable = false, updatable = false)

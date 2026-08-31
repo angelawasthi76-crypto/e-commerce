@@ -19,6 +19,7 @@ public class Category {
 
     
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private CategoryStatus status = CategoryStatus.ACTIVE;
 
     @Column(name = "created_at", nullable = false, updatable = false)

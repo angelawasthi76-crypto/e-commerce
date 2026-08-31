@@ -22,13 +22,13 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByStatus(Product.ProductStatus status, Pageable pageable);
 
-    @Query("SELECT p FROM Product p WHERE p.status = 'ACTIVE' AND " +
+    @Query("SELECT p FROM Product p WHERE p.status = com.ecommerce.product.entity.Product$ProductStatus.ACTIVE AND " +
            "(LOWER(p.name) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(p.description) LIKE LOWER(CONCAT('%', :keyword, '%')) OR " +
            "LOWER(p.brand) LIKE LOWER(CONCAT('%', :keyword, '%')))")
     Page<Product> searchProducts(@Param("keyword") String keyword, Pageable pageable);
 
-    @Query("SELECT p FROM Product p WHERE p.status = 'ACTIVE' AND " +
+    @Query("SELECT p FROM Product p WHERE p.status = com.ecommerce.product.entity.Product$ProductStatus.ACTIVE AND " +
            "(:categoryId IS NULL OR p.categoryId = :categoryId) AND " +
            "(:brand IS NULL OR LOWER(p.brand) = LOWER(:brand)) AND " +
            "(:minPrice IS NULL OR p.finalPrice >= :minPrice) AND " +
@@ -40,7 +40,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             @Param("maxPrice") java.math.BigDecimal maxPrice,
             Pageable pageable);
 
-    @Query("SELECT p FROM Product p WHERE p.status = 'ACTIVE' ORDER BY p.rating DESC")
+    @Query("SELECT p FROM Product p WHERE p.status = com.ecommerce.product.entity.Product$ProductStatus.ACTIVE ORDER BY p.rating DESC")
     List<Product> findTopRatedProducts(Pageable pageable);
 
     List<Product> findByCategoryIdAndStatus(Long categoryId, Product.ProductStatus status);
